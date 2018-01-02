@@ -4,15 +4,21 @@ type element;
 
 [@bs.val] external dom : dom = "document";
 
-[@bs.send] external getElementById : (dom, string) => element = "getElementById";
+[@bs.send]
+external getElementById : (dom, string) => element = "getElementById";
 
-[@bs.scope ("window", "location")] [@bs.val] external pathname : string = "pathname";
+[@bs.scope ("window", "location")] [@bs.val]
+external pathname : string = "pathname";
 
 [@bs.val] external nodeEnv : string = "process.env.NODE_ENV";
 
 [@bs.val] external browserEnv : bool = "process.browser";
 
 [@bs.val] external requireAssetURI : string => string = "require";
+
+[@bs.val] external parseInt : (string, int) => int = "";
+
+let parseInt_ = (int, string) => parseInt(string, int);
 
 let isDEV = nodeEnv !== "production";
 
@@ -22,8 +28,8 @@ let isBrowser = browserEnv;
 
 let text = ReasonReact.stringToElement;
 
-let dangerousHtml: string => Js.t('a) = (html) => {"__html": html};
+let dangerousHtml: string => Js.t('a) = html => {"__html": html};
 
 [@bs.get_index] external gett : ('a, string) => Js.Json.t = "";
 
-let geturl = (req) => gett(req, "url");
+let geturl = req => gett(req, "url");

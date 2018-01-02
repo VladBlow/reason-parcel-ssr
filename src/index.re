@@ -1,19 +1,8 @@
-open ReactRouter;
+[@bs.module "./utils/registerServiceWorker"]
+external registerServiceWorker : unit => unit = "default";
 
-[@bs.val] [@bs.module "react-dom"] external hydrate : (ReasonReact.reactElement, 'a) => unit =
-  "hydrate";
+let history = History.createBrowserHistory();
 
-[@bs.module "./utils/registerServiceWorker"] external registerServiceWorker : unit => unit =
-  "default";
-
-let rootId = Utils.getElementById(Utils.dom, "root");
-
-let app = () => <BrowserRouter> (Root.make()) </BrowserRouter>;
-
-let render = (component) =>
-  Utils.isPROD ?
-    hydrate(component(), rootId) : ReactDOMRe.renderToElementWithId(component(), "root");
-
-render(app);
+AppShell.bootstrap() |> AppShell.render(history##location);
 
 registerServiceWorker();

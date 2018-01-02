@@ -1,3 +1,3 @@
-const runServer = require('./lib/js/src/server.bs')
+const runServer = require("./lib/js/server/server.bs");
 
-module.exports = runServer
+module.exports = runServer;

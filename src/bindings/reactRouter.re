@@ -1,21 +1,26 @@
-type renderFunc =
-  {
-    .
-    "match": Js.Dict.t(string),
-    "history": History.History.t,
-    "location": History.History.Location.t
-  } =>
-  ReasonReact.reactElement;
-
+/* let history = History.createBrowserHistory(); */
+/* type renderFunc =
+   {
+     .
+     "match": Js.Dict.t(string),
+     "history": History.History.t,
+     "location": History.History.Location.t
+   } =>
+   ReasonReact.reactElement; */
 module BrowserRouter = {
-  [@bs.module "react-router-dom"] external browserRouter : ReasonReact.reactClass =
-    "BrowserRouter";
-  let make = (children) =>
-    ReasonReact.wrapJsForReason(~reactClass=browserRouter, ~props=Js.Obj.empty(), children);
+  [@bs.module "react-router-dom"]
+  external browserRouter : ReasonReact.reactClass = "BrowserRouter";
+  let make = children =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=browserRouter,
+      ~props=Js.Obj.empty(),
+      children
+    );
 };
 
 module ServerRouter = {
-  [@bs.module "react-router-dom"] external staticRouter : ReasonReact.reactClass = "StaticRouter";
+  [@bs.module "react-router-dom"]
+  external staticRouter : ReasonReact.reactClass = "StaticRouter";
   let make = (~context: Js.Json.t, ~location: Js.Json.t, children) =>
     ReasonReact.wrapJsForReason(
       ~reactClass=staticRouter,
@@ -25,13 +30,14 @@ module ServerRouter = {
 };
 
 module Route = {
-  [@bs.module "react-router-dom"] external route : ReasonReact.reactClass = "Route";
+  [@bs.module "react-router-dom"]
+  external route : ReasonReact.reactClass = "Route";
   let make =
       (
-        ~component: option(('a => ReasonReact.reactElement))=?,
+        ~component: option('a => ReasonReact.reactElement)=?,
         ~exact: bool=false,
         ~path: option(string)=?,
-        ~render: option(renderFunc)=?,
+        ~render: option('a => ReasonReact.reactElement)=?,
         children
       ) =>
     ReasonReact.wrapJsForReason(
@@ -47,19 +53,34 @@ module Route = {
 };
 
 module Switch = {
-  [@bs.module "react-router-dom"] external _switch : ReasonReact.reactClass = "Switch";
-  let make = (children) =>
-    ReasonReact.wrapJsForReason(~reactClass=_switch, ~props=Js.Obj.empty(), children);
+  [@bs.module "react-router-dom"]
+  external _switch : ReasonReact.reactClass = "Switch";
+  let make = children =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=_switch,
+      ~props=Js.Obj.empty(),
+      children
+    );
 };
 
 module Link = {
-  [@bs.module "react-router-dom"] external link : ReasonReact.reactClass = "Link";
+  [@bs.module "react-router-dom"]
+  external link : ReasonReact.reactClass = "Link";
   let make = (~_to, children) =>
-    ReasonReact.wrapJsForReason(~reactClass=link, ~props={"to": _to}, children);
+    ReasonReact.wrapJsForReason(
+      ~reactClass=link,
+      ~props={"to": _to},
+      children
+    );
 };
 
 module NavLink = {
-  [@bs.module "react-router-dom"] external navLink : ReasonReact.reactClass = "NavLink";
+  [@bs.module "react-router-dom"]
+  external navLink : ReasonReact.reactClass = "NavLink";
   let make = (~_to: string, children) =>
-    ReasonReact.wrapJsForReason(~reactClass=navLink, ~props={"to": _to}, children);
+    ReasonReact.wrapJsForReason(
+      ~reactClass=navLink,
+      ~props={"to": _to},
+      children
+    );
 };
