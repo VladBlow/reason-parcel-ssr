@@ -23,6 +23,10 @@ let onListen = (exn) => {
 
 let start = () => {
   let app = Express.App.make();
+  /* let bundler = Parcel.bundler(Node_path.resolve("./src", "index.html"));
+     if (Config.Server.isDev) {
+       use(app, bundler |> Parcel.middleware())
+     }; */
   Config.Server.isDev ? use(app, morgan("dev")) : use(app, morgan("combined"));
   use(app, helmet());
   useOnPath(

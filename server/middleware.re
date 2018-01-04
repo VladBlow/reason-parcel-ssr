@@ -3,8 +3,6 @@ type asyncMiddleware =
 
 external asyncMiddlewareFrom : asyncMiddleware => Express.Middleware.t = "%identity";
 
-let app = Express.App.make();
-
 module Status = {
   let make = () =>
     asyncMiddlewareFrom(
