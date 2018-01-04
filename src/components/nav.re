@@ -1,12 +1,6 @@
-open ReactRouter;
-
-let component = ReasonReact.statelessComponent("Navigation");
+let component = ReasonReact.statelessComponent("Nav");
 
 let make = (_children) => {
   ...component,
-  render: (_self) =>
-    <nav>
-      <Link _to="/"> (Utils.text("Home")) </Link>
-      <Link _to="/about"> (Utils.text("About")) </Link>
-    </nav>
+  render: (_self) => <nav> <Link _to="/" name="Home" /> <Link _to="/about" name="About" /> </nav>
 };

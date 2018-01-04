@@ -4,7 +4,7 @@ open Express.App;
 
 [@bs.module] external helmet : unit => Express.Middleware.t = "";
 
-let onListen = exn => {
+let onListen = (exn) => {
   let error = Js.Nullable.to_opt(exn);
   switch error {
   | Some(err) =>
@@ -18,15 +18,26 @@ let onListen = exn => {
       ++ " is listening on port "
       ++ Chalk.green(Js.Int.toString(Config.Server.port))
     )
-  };
+  }
 };
 
 let start = () => {
   let app = Express.App.make();
   Config.Server.isDev ? use(app, morgan("dev")) : use(app, morgan("combined"));
   use(app, helmet());
+  useOnPath(
+    app,
+    ~path="/",
+    Express.Static.make("dist/client", Express.Static.defaultOptions())
+    |> Express.Static.asMiddleware
+  );
+  useOnPath(
+    app,
+    ~path="/",
+    Express.Static.make("static", Express.Static.defaultOptions()) |> Express.Static.asMiddleware
+  );
   get(app, ~path="*", Middleware.App.make());
-  listen(app, ~port=Config.Server.port, ~onListen, ());
+  listen(app, ~port=Config.Server.port, ~onListen, ())
 };
 
 start();

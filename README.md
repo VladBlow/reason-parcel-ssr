@@ -10,7 +10,7 @@
 * [x] PWA - [Workbox](https://developers.google.com/web/tools/workbox/)
 * [x] SSR - Server side rendering
 * [x] [Parcel - zero config web app bundler](https://parceljs.org/)
-* [x] [React Router v4](https://reacttraining.com/react-router/api) *[bindings](https://github.com/reasonml-community/bs-react-router) (Waiting for Reason Router solution)
+* [x] [Universal Router](https://github.com/kriasoft/universal-router) *[bindings](https://github.com/reasonml-community/bs-react-router) (Waiting for Reason Router solution)
 * [x] [React Helmet](https://github.com/nfl/react-helmet) bindings
 
 ## Quick start

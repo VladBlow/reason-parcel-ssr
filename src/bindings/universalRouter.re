@@ -6,14 +6,14 @@ external route :
     ~path: string,
     ~name: string=?,
     ~children: array(Js.t({..}))=?,
-    ~action: unit => Js.Promise.t('a)=?,
+    ~action: unit => 'component=?,
     unit
   ) =>
   t =
   "";
 
-[@bs.module] [@bs.new]
-external router : array('routes) => t = "universal-router";
+[@bs.module] [@bs.new] external serverRouter : array('routes) => t = "universal-router";
 
-[@bs.send.pipe : 't]
-external resolve : Js.t({..}) => Js.Promise.t('a) = "resolve";
+[@bs.module "universal-router"] [@bs.new] external clientRouter : array('routes) => t = "default";
+
+[@bs.send.pipe : 't] external resolve : Js.t({..}) => 'component = "resolve";

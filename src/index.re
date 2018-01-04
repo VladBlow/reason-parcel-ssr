@@ -1,5 +1,5 @@
-[@bs.module "./utils/registerServiceWorker"]
-external registerServiceWorker : unit => unit = "default";
+[@bs.module "./utils/registerServiceWorker"] external registerServiceWorker : unit => unit =
+  "default";
 
 let history = History.createBrowserHistory();
 
