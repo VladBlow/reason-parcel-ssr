@@ -7,7 +7,7 @@
 ## Features
 
 * [x] [ReasonReact](https://reasonml.github.io/reason-react/)
-* [x] PWA - [Workbox](https://developers.google.com/web/tools/workbox/)
+* [ ] PWA - [Workbox](https://developers.google.com/web/tools/workbox/) (**Need to fix**)
 * [x] SSR - Server side rendering
 * [x] [Parcel - zero config web app bundler](https://parceljs.org/)
 * [x] [Universal Router](https://github.com/kriasoft/universal-router) *[bindings](https://github.com/reasonml-community/bs-react-router) (Waiting for Reason Router solution)
@@ -22,4 +22,5 @@
 
 ## TODO
 
+* [ ] Fix Workbox (It breaks routing)
 * [ ] Add "CSS-In-Reason" library. Either [bs-css](https://github.com/SentiaAnalytics/bs-css) or [bs-react-fela](https://github.com/astrada/bs-react-fela).
