@@ -1,6 +1,6 @@
 let component = ReasonReact.statelessComponent("About");
 
-let make = (_children) => {
+let make = (~redirect, _children) => {
   ...component,
   render: (_self) =>
     <div>
@@ -8,6 +8,8 @@ let make = (_children) => {
         <title> (Utils.text("About ReasonReact Starter")) </title>
         <meta name="description" content="About page description" />
       </ReactHelmet>
-      <Hello message="Hello from about component" />
+      <a onClick=(redirect("/"))> ("Home" |> Utils.text) </a>
+      <a onClick=(redirect("/about"))> ("About" |> Utils.text) </a>
+      <Hello message="Hola from about component" />
     </div>
 };

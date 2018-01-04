@@ -3,6 +3,6 @@
 
 let history = History.createBrowserHistory();
 
-AppShell.bootstrap() |> AppShell.render(history##location);
+AppShell.bootstrap(history) |> AppShell.onLocationChange(history##location);
 
 registerServiceWorker();

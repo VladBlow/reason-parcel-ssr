@@ -1,6 +1,6 @@
 open UniversalRouter;
 
-let handlers = () => [|
-  route(~path="", ~action=() => <Home />, ()),
-  route(~path="/about", ~action=() => <About />, ())
+let handlers = (redirect) => [|
+  route(~path="", ~action=() => <Home redirect />, ()),
+  route(~path="/about", ~action=() => <About redirect />, ())
 |];

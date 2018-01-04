@@ -5,7 +5,11 @@ type renderElement = ReasonReact.reactElement => ReasonReact.reactElement;
 
 let rootId = Utils.getElementById(Utils.dom, "root");
 
-let render = (location, router) =>
+let onLocationChange = (location, router) => {
+  let currentLocation = location;
+  if (currentLocation##key !== location##key) {
+    ()
+  };
   router
   |> UniversalRouter.resolve({"pathname": location##pathname})
   |> Js.Promise.then_(
@@ -16,16 +20,16 @@ let render = (location, router) =>
            ReactDOMRe.renderToElementWithId(<App> component </App>, "root");
          Js.Promise.resolve()
        }
-     );
+     )
+};
 
-let bootstrap = () => {
-  let history = History.createBrowserHistory();
+let bootstrap = (history) => {
   let dispatcher = (target, event) => {
     Js.log("Redirect to " ++ target);
     ReactEventRe.Mouse.preventDefault(event);
     history##push(target)
   };
-  let router = UniversalRouter.clientRouter(Routes.handlers());
-  render(history##location, router) |> ignore;
+  let router = UniversalRouter.clientRouter(Routes.handlers(dispatcher));
+  history##listen((location) => onLocationChange(location, router));
   router
 };

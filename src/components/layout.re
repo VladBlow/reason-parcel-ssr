@@ -1,6 +1,6 @@
 let component = ReasonReact.statelessComponent("Layout");
 
-let make = (children) => {
+let make = (~renderFunc, _children) => {
   ...component,
   render: (_self) =>
     <div>
@@ -17,6 +17,6 @@ let make = (children) => {
         />
       </ReactHelmet>
       <Header />
-      (children[0]())
+      renderFunc
     </div>
 };

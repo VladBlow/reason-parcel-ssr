@@ -16,7 +16,13 @@ module App = {
   let make = () =>
     asyncMiddlewareFrom(
       (req, res, _next) => {
-        let universalRouter = UniversalRouter.serverRouter(Routes.handlers());
+        let dispatcher = (target, event) => {
+          let history = History.createBrowserHistory();
+          Js.log("Redirect to " ++ target);
+          ReactEventRe.Mouse.preventDefault(event);
+          history##push(target)
+        };
+        let universalRouter = UniversalRouter.serverRouter(Routes.handlers(dispatcher));
         universalRouter
         |> UniversalRouter.resolve({"pathname": Express.Request.path(req)})
         |> Js.Promise.then_(
